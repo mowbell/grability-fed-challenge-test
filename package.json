@@ -1,0 +1,11 @@
+{
+  "name": "grability-fed-code-challenge",
+  "version": "1.0.0",
+  "description": "Grability FED Code Challenge",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mauricio Bello",
+  "license": "ISC"
+}
