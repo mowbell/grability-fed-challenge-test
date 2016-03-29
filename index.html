@@ -1,18 +1,53 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
-    <title>Grability Front End Code Challenge</title>
-    <link rel="stylesheet" href="libs/semantic/dist/semantic.min.css" />
-    <link rel="stylesheet" href="styles/style.css" />
-</head>
-
-<body>
-    <script type="text/javascript" src="libs/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="dist/app.js"></script>
-    <script type="text/javascript" src="libs/semantic/dist/semantic.min.js"></script>
-</body>
-
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+		<title>Grability Front End Code Challenge</title>
+		<link rel="stylesheet" href="libs/semantic/dist/semantic.min.css" />
+		<link rel="stylesheet" href="styles/style.css" />
+	</head>
+	<body>
+		<div class="ui container">
+			<h1 class="header">Cube Summation</h1>
+			<div class="ui equal width grid segment divided">
+				<div class="row">
+					<div class="column">
+						
+						<h2>Input</h2>
+						<div class="ui form">
+							<div class="field">
+								<label>Escriba los comandos aquí:</label>
+								<textarea rows="15"></textarea>
+							</div>
+							<div class="ui red button fluid">Ejecutar</div>
+						</div>
+						
+					</div>
+					<div class="grey inverted column">
+						<h2>Output</h2>
+						<div class="ui icon error message">
+							<i class="warning sign red icon"></i>
+							<div class="content">
+								<div class="header">
+									<code>Error en la Linea 1</code>
+								</div>
+								<p>El query esta mal escrito.</p>
+							</div>
+						</div>
+						
+						<div class="ui form">
+							<div class="field">
+								<label>Resultado:</label>
+								<textarea rows="12" readonly=""></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="libs/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="dist/app.js"></script>
+		<script type="text/javascript" src="libs/semantic/dist/semantic.min.js"></script>
+	</body>
 </html>
