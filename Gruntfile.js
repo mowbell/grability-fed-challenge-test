@@ -7,11 +7,14 @@ module.exports = function(grunt) {
             all: ['Gruntfile.js', 'app/*.js', 'app/**/*.js'],
             dev: {
                 files: {
-                    src: ['Gruntfile.js', 'app/*.js', 'app/**/*.js']
+                    src: ['Gruntfile.js', 'app/*.js', 'app/**/*.js', 'test/*.js']
                 },
                 options: {
                     debug: true,
-                    undef: false
+                    undef: false,
+                    strict:false,
+                    node:true,
+                    jasmine:true
                 }
             }
         },
@@ -21,7 +24,7 @@ module.exports = function(grunt) {
             },
             //se configura que archivos se monitorean para ejecutar instantaneamente cambios
             dev: {
-                files: ['Gruntfile.js', 'app/*.js', 'index.html'],
+                files: ['Gruntfile.js', 'app/*.js', 'app/**/*.js', 'index.html', 'test/*.js', 'styles/style.css'],
                 tasks: ['jshint:dev', 'browserify:dev'],
 
                 options: {
