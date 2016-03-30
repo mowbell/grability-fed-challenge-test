@@ -10,7 +10,7 @@
 	<body>
 		<div class="ui container">
 			<h1 class="header">Cube Summation</h1>
-			<div class="ui equal width grid segment divided">
+			<div id="main-view" class="ui equal width grid segment divided">
 				<div class="row">
 					<div class="column">
 						
@@ -18,9 +18,9 @@
 						<div class="ui form">
 							<div class="field">
 								<label>Escriba los comandos aquí:</label>
-								<textarea rows="15"></textarea>
+								<textarea id="commands-text" rows="15"></textarea>
 							</div>
-							<div class="ui red button fluid">Ejecutar</div>
+							<div id="execute-button" class="ui red button fluid">Ejecutar</div>
 						</div>
 						
 					</div>
@@ -39,7 +39,7 @@
 						<div class="ui form">
 							<div class="field">
 								<label>Resultado:</label>
-								<textarea rows="12" readonly=""></textarea>
+								<textarea id="execution-result-text" rows="12" readonly=""></textarea>
 							</div>
 						</div>
 					</div>
@@ -47,7 +47,8 @@
 			</div>
 		</div>
 		<script type="text/javascript" src="libs/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="libs/underscore/underscore-min.js"></script>
+		<script type="text/javascript" src="libs/backbone/backbone-min.js"></script>
 		<script type="text/javascript" src="dist/app.js"></script>
-		<script type="text/javascript" src="libs/semantic/dist/semantic.min.js"></script>
 	</body>
 </html>

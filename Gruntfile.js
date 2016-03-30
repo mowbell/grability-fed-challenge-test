@@ -25,7 +25,7 @@ module.exports = function(grunt) {
             //se configura que archivos se monitorean para ejecutar instantaneamente cambios
             dev: {
                 files: ['Gruntfile.js', 'app/*.js', 'app/**/*.js', 'index.html', 'test/*.js', 'styles/style.css'],
-                tasks: ['jshint:dev', 'browserify:dev'],
+                tasks: ['clear','jshint:dev', 'browserify:dev'],
 
                 options: {
                     atBegin: true
@@ -47,6 +47,9 @@ module.exports = function(grunt) {
                 dest: 'dist/app.js',
                 options: {
                     external: ['jquery'],
+                    browserifyOptions: {
+                         debug: true
+                      }
                 }
             }
         },
@@ -57,6 +60,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-clear');
 
 
     grunt.registerTask('dev', ['connect:server', 'watch:dev']);

@@ -1,4 +1,6 @@
-var main2=require('./main2');
+var Application=require('./Application');
 
-console.log(main2('Mauricio'));
-console.log($('body'));
+$(function(){
+	var app=new Application();
+	app.start();
+});
