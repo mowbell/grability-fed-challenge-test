@@ -6,22 +6,20 @@ var Application=function(){
 	this.start=function(){
 		mainView=new CommandsView();
 		mainView.on(CommandsView.EXECUTION_STARTED, _onExectionStarted);
-		console.log('Application Started');
 	};
 
 	var _onExectionStarted=function(commandsString){
-		console.log("comandos fueron", commandsString);
 		execute(commandsString);
 	};
 
 	var execute=function(commandsString){
 		var execution=new Execution(commandsString);
-		execution.then(_onExecutionSuccess,_onExecutionError);
+		execution.getPromise().then(_onExecutionSuccess,_onExecutionError);
 	};
 
-	var _onExecutionSuccess=function(resultString){
-		console.log("resultado fue", resultString);
-		showResults(resultString);
+	var _onExecutionSuccess=function(executionResult){
+		console.log("resultado fue", executionResult);
+		showResults(executionResult);
 	};
 
 	var _onExecutionError=function(executionError){
@@ -29,12 +27,14 @@ var Application=function(){
 		showError(executionError);
 	};
 
-	var showResults=function(resultString){
-		mainView.displayResults(resultString);
+	var showResults=function(executionResult){
+		var resultString=executionResult.getValue();
+		var timeElapsed=executionResult.getTimeElapsed();
+		mainView.displayResults(resultString, timeElapsed);
 	};
 
 	var showError=function(executionError){
-		mainView.displayerror(executionError);
+		mainView.displayError(executionError);
 	};
 
 };
