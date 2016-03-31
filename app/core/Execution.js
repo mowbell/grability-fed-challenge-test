@@ -41,33 +41,39 @@ var Execution = function(commandsString) {
     		//commands.push(testPlanCommand);
     		var numTestCases=testPlanCommand.getNumTestCases();
 
-
-    		for(var i=1;i<=numTestCases;i++){
-    			debugger;
-    			var testCaseCommand=new TestCaseCommand(getNextLine());
-    			var validationTestCase=testCaseCommand.validate();
-    			debugger;
-    			if(validationTestCase.isValid()){
-    				
-    				testPlanCommand.addTestCaseCommand(testCaseCommand);
-    				var numOperations=testCaseCommand.getNumOperations();
-    				var cubeSize=testCaseCommand.getCubeSize();
-    				for(var j=1;j<=numOperations;j++){
-    					var operationCommand=new OperationCommand(getNextLine(), cubeSize);	
-    					var validationOperation=operationCommand.validate();
-    					if(validationOperation.isValid()){
-    						testCaseCommand.addOperationCommand(testCaseCommand);
-    					}
-    					else{
-    						dispatchValidationError(validationOperation,curLineNumber);
-    						break;
-    					}
-    				}
-    			}
-    			else{
-    				dispatchValidationError(validationTestCase,curLineNumber);
-    				break;
-    			}
+    		creationTestCases:{
+	    		for(var i=1;i<=numTestCases;i++){
+	    			debugger;
+	    			var testCaseCommand=new TestCaseCommand(getNextLine());
+	    			var validationTestCase=testCaseCommand.validate();
+	    			debugger;
+	    			if(validationTestCase.isValid()){
+	    				
+	    				testPlanCommand.addTestCaseCommand(testCaseCommand);
+	    				var numOperations=testCaseCommand.getNumOperations();
+	    				var cubeSize=testCaseCommand.getCubeSize();
+	    				debugger;
+	    				creationOperations:{
+		    				for(var j=1;j<=numOperations;j++){
+		    					debugger;
+		    					var operationCommand=new OperationCommand(getNextLine(), cubeSize);	
+		    					var validationOperation=operationCommand.validate();
+		    					if(validationOperation.isValid()){
+		    						testCaseCommand.addOperationCommand(testCaseCommand);
+		    					}
+		    					else{
+		    						dispatchValidationError(validationOperation,curLineNumber);
+		    						break creationTestCases;
+		    						
+		    					}
+		    				}
+	    				}
+	    			}
+	    			else{
+	    				dispatchValidationError(validationTestCase,curLineNumber);
+	    				break creationTestCases;
+	    			}
+	    		}
     		}
 
     	}

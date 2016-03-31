@@ -41,7 +41,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-        browserify: {
+        browserify: {//http://coenraets.org/blog/2014/01/browserify-sample-application-with-backbone-jquery-handlebars-and-cordova/
             dev: {
                 src: ['app/**/*.js'],
                 dest: 'dist/app.js',

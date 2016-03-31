@@ -52,7 +52,7 @@ var TestCaseCommand=function(commandString){
 		}
 		return validation;
 	};
-	this.addOperationCommand=function(testCaseCommand){
+	this.addOperationCommand=function(operationCommand){
 
 	};
 

@@ -26,7 +26,7 @@ module.exports = function(karma) {
     // browserify configuration
     browserify: {
       debug: true,
-      insertGlobalVars: {
+      insertGlobalVars: { //http://stackoverflow.com/questions/23480336/defining-global-variable-for-browserify
         Backbone: function(file, dir) {
           return 'require("backbone")';
         },
@@ -37,7 +37,7 @@ module.exports = function(karma) {
           return 'require("underscore")';
         }
       }
-      /*shim: {
+      /*shim: {//http://benclinkinbeard.com/posts/external-bundles-for-faster-browserify-builds/
         jquery: {
           path: './libs/jquery.js',
           exports: '$'
