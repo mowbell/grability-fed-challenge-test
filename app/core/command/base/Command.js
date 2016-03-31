@@ -6,13 +6,13 @@ var Command=function(command){
 		return commandString.trim();
 	};
 	this.getPromise=function(){
-		return deferred.promise;
+		return deferred.promise();
 	};
-	this.dispatchSucess=function(result){
-		this.getPromise().success(result);
+	this.dispatchSuccess=function(result){
+		deferred.resolve(result);
 	};
 	this.dispatchError=function(error){
-		this.getPromise().reject(error);
+		deferred.reject(error);
 	};
 	this.validate=function(command){
 		return true;
@@ -23,6 +23,7 @@ var Command=function(command){
 
 };
 Command.extends=function(Child){
+	//http://julien.richard-foy.fr/blog/2011/10/30/functional-inheritance-vs-prototypal-inheritance/
 	function F() {}
 	F.prototype = Command.prototype;
 	Child.prototype=new F();

@@ -5,7 +5,6 @@ var QueryCommand=require("./QueryCommand");
 var UpdateCommand=require("./UpdateCommand");
 
 var OperationCommand=function(commandString, cubeSize){
-	debugger;
 	if(/^QUERY/.test(commandString)){
 		return new QueryCommand(commandString,cubeSize);
 	}
@@ -15,7 +14,6 @@ var OperationCommand=function(commandString, cubeSize){
 	
 	Command.call(this,commandString);
 	this.validate=function(){
-		debugger;
 		var cmd=this.getCommandString();
 		var validation=new Command.Validation(cmd);
 		if(cmd!==""){

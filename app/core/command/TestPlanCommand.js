@@ -5,6 +5,8 @@ var Config=require("./../../config/Config");
 var TestPlanCommand=function(commandString){
 	Command.call(this,commandString);
 	var numTestCases=0;
+	var testCases=[];
+	var that=this;
 	var setNumTestCases=function(num){
 		numTestCases=num;
 	};
@@ -37,7 +39,43 @@ var TestPlanCommand=function(commandString){
 
 	};
 	this.addTestCaseCommand=function(testCaseCommand){
+		testCases.push(testCaseCommand);
+	};
 
+	this.execute=function(){
+		debugger;
+		var countTestCasesExecuted=0;
+		var resultsString="";
+		
+		var successCallback=function(){
+			debugger;
+			console.log("Test Plan executed\n\n"+resultsString);
+			that.dispatchSuccess(resultsString);
+		};
+		var errorCallback=function(){
+			debugger;
+			this.dispatchError(arguments);
+			console.warn("Error en la ejecución del test plan");
+		};
+		function testCaseExecuted(result){
+			debugger;
+			resultsString+=result+"\n";
+			executeNextTestCase();
+		}
+		function executeNextTestCase(){
+			
+			if(countTestCasesExecuted<that.getNumTestCases()){
+				var nextTestCase=testCases[countTestCasesExecuted++];
+				nextTestCase.execute().getPromise().then(testCaseExecuted, errorCallback);
+			}
+			else{
+				successCallback();
+			}
+		}
+		executeNextTestCase();
+
+		
+		return that;
 	};
 };
 TestPlanCommand=Command.extends(TestPlanCommand);

@@ -3,7 +3,6 @@ var TestCaseCommand=require("./TestCaseCommand");
 var ErrorMessage=require("./../../config/ErrorMessage");
 var Config=require("./../../config/Config");
 var UpdateCommand=function(commandString, _cubeSize){
-	debugger;
 	Command.call(this,commandString);
 	var cubeSize=_cubeSize;
 	var cellX=0;
@@ -27,7 +26,6 @@ var UpdateCommand=function(commandString, _cubeSize){
 		return cellCoord>=Config.MIN_CUBE_SIZE && cellCoord<=that.getCubeSize();
 	};
 	this.validate=function(){
-		debugger;
 		var cmd=this.getCommandString();
 		var validation=new Command.Validation(cmd);
 		var regex=/^UPDATE\s{1}\d+\s{1}\d+\s{1}\d+\s{1}-?\d+$/;
@@ -68,6 +66,13 @@ var UpdateCommand=function(commandString, _cubeSize){
 		}
 		return validation;
 
+	};
+
+	this.execute=function(){
+		debugger;
+		console.log('Update Executed '+that.getCommandString());
+		that.dispatchSuccess('Update OK '+that.getCommandString());
+		return that;
 	};
 };
 UpdateCommand=Command.extends(UpdateCommand);

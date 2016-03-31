@@ -3,7 +3,6 @@ var TestCaseCommand=require("./TestCaseCommand");
 var ErrorMessage=require("./../../config/ErrorMessage");
 var Config=require("./../../config/Config");
 var QueryCommand=function(commandString, _cubeSize){
-	debugger;
 	Command.call(this,commandString);
 	var cubeSize=_cubeSize;
 	var cellX1=0,cellX2=0,cellY1=0,cellY2=0,cellZ1=0,cellZ2=0;
@@ -23,7 +22,6 @@ var QueryCommand=function(commandString, _cubeSize){
 		return cellCoord>=Config.MIN_CUBE_SIZE && cellCoord<=that.getCubeSize();
 	};
 	this.validate=function(){
-		debugger;
 		var cmd=this.getCommandString();
 		var validation=new Command.Validation(cmd);
 		var regex=/^QUERY\s{1}\d+\s{1}\d+\s{1}\d+\s{1}\d+\s{1}\d+\s{1}\d+$/;
@@ -61,6 +59,13 @@ var QueryCommand=function(commandString, _cubeSize){
 		}
 		return validation;
 
+	};
+
+	this.execute=function(cube){
+		debugger;
+		console.log('Query Executed '+that.getCommandString());
+		that.dispatchSuccess('Query OK '+that.getCommandString());
+		return that;
 	};
 };
 QueryCommand=Command.extends(QueryCommand);

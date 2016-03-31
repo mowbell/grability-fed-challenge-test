@@ -5,6 +5,7 @@ var TestCaseCommand=require('../core/command/TestCaseCommand');
 var OperationCommand=require('../core/command/OperationCommand');
 var Execution = function(commandsString) {
     var execDeferred = jQuery.Deferred();
+    var executionErrorDispathed=false;
     createCommands(commandsString);
     function extractLines(commandsString){
     	if(!commandsString || commandsString===''){
@@ -43,23 +44,19 @@ var Execution = function(commandsString) {
 
     		creationTestCases:{
 	    		for(var i=1;i<=numTestCases;i++){
-	    			debugger;
 	    			var testCaseCommand=new TestCaseCommand(getNextLine());
 	    			var validationTestCase=testCaseCommand.validate();
-	    			debugger;
 	    			if(validationTestCase.isValid()){
 	    				
 	    				testPlanCommand.addTestCaseCommand(testCaseCommand);
 	    				var numOperations=testCaseCommand.getNumOperations();
 	    				var cubeSize=testCaseCommand.getCubeSize();
-	    				debugger;
 	    				creationOperations:{
 		    				for(var j=1;j<=numOperations;j++){
-		    					debugger;
 		    					var operationCommand=new OperationCommand(getNextLine(), cubeSize);	
 		    					var validationOperation=operationCommand.validate();
 		    					if(validationOperation.isValid()){
-		    						testCaseCommand.addOperationCommand(testCaseCommand);
+		    						testCaseCommand.addOperationCommand(operationCommand);
 		    					}
 		    					else{
 		    						dispatchValidationError(validationOperation,curLineNumber);
@@ -67,6 +64,7 @@ var Execution = function(commandsString) {
 		    						
 		    					}
 		    				}
+                            
 	    				}
 	    			}
 	    			else{
@@ -75,12 +73,14 @@ var Execution = function(commandsString) {
 	    			}
 	    		}
     		}
-
+            
     	}
     	else{
     		dispatchValidationError(validationTestPlan,curLineNumber);
     	}
-    	console.log(testPlanCommand);
+
+        if(!executionErrorDispathed)
+            executeCommands(testPlanCommand);
 
 
 
@@ -89,7 +89,19 @@ var Execution = function(commandsString) {
 	    });*/
     }
 
+
+    function executeCommands(testPlanCommand){
+        debugger;
+        testPlanCommand.execute().getPromise().done(function(){
+            console.log("Ejecucion completada");
+            debugger;
+        }).fail(function(){
+            debugger;
+        });
+    }
+
     function dispatchValidationError(validation, line ){
+        executionErrorDispathed=true;
     	dispatchError(
     		validation.getCommandString(), 
     		validation.getErrorMessage(), 

@@ -6,6 +6,9 @@ var TestCaseCommand=function(commandString){
 	Command.call(this,commandString);
 	var cubeSize=0;
 	var numOperations=0;
+	var operations=[];
+	var that=this;
+	var cube=null;
 	var setCubeSize=function(num){
 		cubeSize=num;
 	};
@@ -18,11 +21,13 @@ var TestCaseCommand=function(commandString){
 	this.getNumOperations=function(){
 		return numOperations;
 	};
+	function getCube(){
+		return cube;
+	}
 	this.validate=function(){
 		var cmd=this.getCommandString();
 		var validation=new Command.Validation(cmd);
 		var regex=/^\d+\s{1}\d+$/;
-		debugger;
 		if(cmd!==""){
 			if(regex.test(cmd)){
 				var values=cmd.match(/\d+/g);
@@ -53,7 +58,44 @@ var TestCaseCommand=function(commandString){
 		return validation;
 	};
 	this.addOperationCommand=function(operationCommand){
+		operations.push(operationCommand);
+	};
 
+	this.execute=function(){
+		debugger;
+		var countOperationsExecuted=0;
+		var resultsString="";
+		
+		var successCallback=function(){
+			debugger;
+			console.log("Test Case executed\n\n"+resultsString);
+			that.dispatchSuccess(resultsString);
+		};
+		var errorCallback=function(){
+			debugger;
+			this.dispatchError(arguments);
+			console.warn("Error en la ejecución del test case");
+		};
+		function operationExecuted(result){
+			debugger;
+			resultsString+=result+"\n";
+			executeNextOperation();
+		}
+		function executeNextOperation(){
+			debugger;
+			if(countOperationsExecuted<that.getNumOperations()){
+				var nextOperation=operations[countOperationsExecuted++];
+				nextOperation.getPromise().then(operationExecuted, errorCallback);
+				nextOperation.execute(getCube());
+			}
+			else{
+				successCallback();
+			}
+		}
+		executeNextOperation();
+
+		
+		return that;
 	};
 
 };
