@@ -1,12 +1,15 @@
 var CommandsView = Backbone.View.extend({
   el: '#main-view',
   commandsInput:null,
+  executionButton:null,
   executionOutput:null,
+  errorMessage:null,
   events:{
   	'click #execute-button':'_onExecuteBtnClick'
   },
   initialize:function(){
-  	this.commandsInput=this.$('#commands-text');
+    this.commandsInput=this.$('#commands-text');
+  	
     
 
     var dummyCommands=  "2";
@@ -24,7 +27,10 @@ var CommandsView = Backbone.View.extend({
 
 
     this.commandsInput.val(dummyCommands);
+    this.executionButton=this.$('#execute-button');
   	this.executionOutput=this.$('#execution-result-text');
+    this.errorMessage=this.$('#execution-error-message');
+    this.errorMessage.hide();
   },
   _onExecuteBtnClick:function(e){
   	this._dispatchExecute();
@@ -33,15 +39,21 @@ var CommandsView = Backbone.View.extend({
   _dispatchExecute:function(){
   	var commands=this.commandsInput.val();
   	this.trigger(CommandsView.EXECUTION_STARTED, commands);
+    this.executionButton.addClass('disabled').addClass('loading');
   },
   displayResults:function(resultString, timeElapsed){
-  	this._showResults(resultString);
-  },
-  _showResults:function(resultString){
-  	this.executionOutput.val(resultString);
+    this.errorMessage.hide();
+  	this.executionOutput.val("Tiempo ejecución: "+timeElapsed+" ms\n"+resultString);
+    this.executionButton.removeClass('disabled').removeClass('loading');
   },
   displayError:function(executionError){
-    this.executionOutput.val(executionError.getErrorMessage());
+    this.errorMessage.show();
+    var errorTitle="Error";
+    if(executionError.getCommandLine() && executionError.getCommandString())
+      errorTitle="Error en la línea "+executionError.getCommandLine()+' <br/> ["'+executionError.getCommandString()+ '"]';
+    this.errorMessage.find('code').html(errorTitle);
+    this.errorMessage.find('p').text(executionError.getErrorMessage());
+    this.executionOutput.val("");
   }
 },{
 	EXECUTION_STARTED:'execution-started'
