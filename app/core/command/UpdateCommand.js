@@ -81,7 +81,6 @@ var UpdateCommand=function(commandString, _cubeSize){
 	};
 
 	this.execute=function(cube){
-		debugger;
 		cube.updateCell(getCellX(), getCellY(), getCellZ(), getValueToTupdate())
 		.then(that.dispatchSuccess,that.dispatchError);
 		return that;

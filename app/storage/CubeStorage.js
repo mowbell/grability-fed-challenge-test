@@ -15,14 +15,13 @@ try {
 }
 
 function execQuery(query, params) {
-	debugger;
     var deferred = jQuery.Deferred();
     if (DB !== null) {
         DB.transaction(function(tx) {
             tx.executeSql(query, params, function(tx, results) {
                 deferred.resolve(results);
             }, function(tx, error) {
-                console.log('error', error);
+                //console.log('error', error);
                 deferred.reject(error);
             });
         });
@@ -40,16 +39,14 @@ CubeStorage.createTable = function() {
     sql += CubeStorage.CUBE_CELL_Z + ' NUMERIC, ';
     sql += CubeStorage.CUBE_CELL_VALUE + ' NUMERIC, ';
     sql += "PRIMARY KEY (" + CubeStorage.CUBE_CELL_X + ',' + CubeStorage.CUBE_CELL_Y + ',' + CubeStorage.CUBE_CELL_Z + ') );';
-    console.log(sql);
-    debugger;
+    //console.log(sql);
 
     return execQuery(sql, []);
 };
 
 CubeStorage.resetCube = function(size) {
 	var sql = 'DELETE FROM ' + CubeStorage.CUBE_CELL_TABLE + ' ';
-    console.log(sql);
-    debugger;
+    //console.log(sql);
     return execQuery(sql, []);
 };
 
@@ -66,8 +63,7 @@ CubeStorage.populateCube = function(size) {
     }
 
     sql+=cells.join(', ');
-    console.log(sql);
-    debugger;
+    //console.log(sql);
     return execQuery(sql, []);
 };
 
@@ -80,8 +76,7 @@ CubeStorage.updateCell = function(x, y, z, value) {
     sql += 'AND ' + CubeStorage.CUBE_CELL_Y + ' = ' + y + ' ';
     sql += 'AND ' + CubeStorage.CUBE_CELL_Z + ' = ' + z + ' ';
 
-    console.log(sql);
-    debugger;
+    //console.log(sql);
     return execQuery(sql, []);
     
 };
@@ -91,8 +86,7 @@ CubeStorage.getCell = function(x, y, z) {
     sql += 'WHERE ' + CubeStorage.CUBE_CELL_X + ' = ' + x + ' ';
     sql += 'AND ' + CubeStorage.CUBE_CELL_Y + ' = ' + y + ' ';
     sql += 'AND ' + CubeStorage.CUBE_CELL_Z + ' = ' + z + ' ';
-    console.log(sql);
-    debugger;
+    //console.log(sql);
     return execQuery(sql, []);
 };
 
@@ -104,8 +98,7 @@ CubeStorage.summateCells = function(x1, y1, z1, x2, y2, z2) {
     sql += 'AND ' + CubeStorage.CUBE_CELL_Y + ' <= ' + y2 + ' ';
     sql += 'AND ' + CubeStorage.CUBE_CELL_Z + ' >= ' + z1 + ' ';
     sql += 'AND ' + CubeStorage.CUBE_CELL_Z + ' <= ' + z2 + ' ';
-    console.log(sql);
-    debugger;
+    //console.log(sql);
     return execQuery(sql, []);
 };
 

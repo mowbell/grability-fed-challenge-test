@@ -1,6 +1,5 @@
 var CommandsView = require('./views/CommandsView');
 var Execution = require('./core/Execution');
-//var CubeStorage = require('./storage/CubeStorage');
 var Application = function() {
     var mainView = null;
     var that = this;
@@ -14,25 +13,18 @@ var Application = function() {
     };
 
     var execute = function(commandsString) {
-        /*var populateCube=function(){CubeStorage.populateCube(4);};
-        var resetCube=function(){CubeStorage.resetCube().then(populateCube);};
-        var createTable=function(){CubeStorage.createTable().then(resetCube);};
-        createTable();*/
-        /*CubeStorage.createTable()
-        .then(CubeStorage.resetCube)
-        .then(function(){return CubeStorage.populateCube(4)});*/
-        var execution=new Execution(commandsString);
-        execution.getPromise().then(_onExecutionSuccess,_onExecutionError);
-
-        //console.log(CubeStorage.createTable().then(CubeStorage.resetCube).then(function() { CubeStorage.populateCube(4);}));
+        var execution = new Execution(commandsString);
+        execution.getPromise().then(_onExecutionSuccess, _onExecutionError);
     };
 
     var _onExecutionSuccess = function(executionResult) {
+        debugger;
         console.log("resultado fue", executionResult);
         showResults(executionResult);
     };
 
     var _onExecutionError = function(executionError) {
+        debugger;
         console.log("resultado con error fue", executionError);
         showError(executionError);
     };

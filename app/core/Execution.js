@@ -82,11 +82,6 @@ var Execution = function(commandsString) {
         if(!executionErrorDispathed)
             executeCommands(testPlanCommand);
 
-
-
-	    /*_.each(lines, function(line, index){
-	    	console.log(index, line);
-	    });*/
     }
 
 
@@ -122,7 +117,6 @@ var Execution = function(commandsString) {
     }
 
     function dispatchSuccess(resultString, timeElapsed ){
-        debugger;
         var result=new Execution.Result(
             resultString, 
             timeElapsed

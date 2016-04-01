@@ -62,7 +62,6 @@ var QueryCommand=function(commandString, _cubeSize){
 	};
 
 	this.execute=function(cube){
-		debugger;
 		cube.summateCells(cellX1,cellY1,cellZ1, cellX2, cellY2, cellZ2)
 		.then(that.dispatchSuccess,that.dispatchError);
 		return that;
