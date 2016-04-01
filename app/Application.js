@@ -18,14 +18,14 @@ var Application = function() {
     };
 
     var _onExecutionSuccess = function(executionResult) {
-        debugger;
-        console.log("resultado fue", executionResult);
+        //debugger;
+        //console.log("resultado fue", executionResult);
         showResults(executionResult);
     };
 
     var _onExecutionError = function(executionError) {
-        debugger;
-        console.log("resultado con error fue", executionError);
+        //debugger;
+        //console.log("resultado con error fue", executionError);
         showError(executionError);
     };
 

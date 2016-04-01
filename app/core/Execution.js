@@ -86,13 +86,13 @@ var Execution = function(commandsString) {
 
 
     function executeCommands(testPlanCommand){
-        debugger;
+        //debugger;
         var timeStart=new Date().getTime();
         testPlanCommand.execute().getPromise().done(function(resultString){
             var timeEnd=new Date().getTime();
             var timeElapsed=timeEnd-timeStart;
-            console.log("Ejecucion completada", timeElapsed);
-            debugger;
+            //console.log("Ejecucion completada", timeElapsed);
+            //debugger;
             dispatchSuccess(resultString, timeElapsed);
         }).fail(function(){
             dispatchError('', ErrorMessage.EXECUTION_ERROR,0);
