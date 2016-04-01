@@ -9,16 +9,16 @@ var Cube=function(size){
 	};
 	this.updateCell=function(x,y,z,value){
 		debugger;
-		return CubeStorage.updateCell(x,y,z,value).then(function(){
+		return CubeStorage.updateCell(x,y,z,value).then(function(result){
 			debugger;
-			return 6666;
+			return null;
 		});
 	};
 	this.summateCells=function(x1, y1, z1, x2, y2, z2){
 		debugger;
-		return CubeStorage.summateCells(x1, y1, z1, x2, y2, z2).then(function(){
+		return CubeStorage.summateCells(x1, y1, z1, x2, y2, z2).then(function(resultSet){
 			debugger;
-			return 3333;
+			return resultSet.rows[0].sum;
 		});
 	};
 };

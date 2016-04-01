@@ -71,20 +71,24 @@ var TestCaseCommand=function(commandString){
 		
 		var countOperationsExecuted=0;
 		var resultsString="";
+		var results=[];
 		
 		var successCallback=function(){
 			debugger;
+			resultsString=results.join('\n');
 			console.log("Test Case executed\n\n"+resultsString);
 			that.dispatchSuccess(resultsString);
 		};
 		var errorCallback=function(){
 			debugger;
-			this.dispatchError(arguments);
+			that.dispatchError(arguments);
 			console.warn("Error en la ejecución del test case");
 		};
 		function operationExecuted(result){
 			debugger;
-			resultsString+=result+"\n";
+			if(result!==null && _.isNumber(result)){
+				results.push(result);
+			}
 			executeNextOperation();
 		}
 		function executeNextOperation(){

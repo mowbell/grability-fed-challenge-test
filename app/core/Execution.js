@@ -93,12 +93,14 @@ var Execution = function(commandsString) {
     function executeCommands(testPlanCommand){
         debugger;
         var timeStart=new Date().getTime();
-        testPlanCommand.execute().getPromise().done(function(){
+        testPlanCommand.execute().getPromise().done(function(resultString){
             var timeEnd=new Date().getTime();
-            console.log("Ejecucion completada", timeEnd-timeStart);
+            var timeElapsed=timeEnd-timeStart;
+            console.log("Ejecucion completada", timeElapsed);
             debugger;
+            dispatchSuccess(resultString, timeElapsed);
         }).fail(function(){
-            debugger;
+            dispatchError('', ErrorMessage.EXECUTION_ERROR,0);
         });
     }
 
@@ -119,12 +121,21 @@ var Execution = function(commandsString) {
     	execDeferred.reject(error);	
     }
 
+    function dispatchSuccess(resultString, timeElapsed ){
+        debugger;
+        var result=new Execution.Result(
+            resultString, 
+            timeElapsed
+        );
+        execDeferred.resolve(result); 
+    }
+
     this.getPromise=function(){
     	return execDeferred.promise();
     };
     
 };
-Execution.Result = function(value, timeElapsed, execution) {
+Execution.Result = function(value, timeElapsed) {
     var mValue = value;
     var mTimeElapsed = timeElapsed;
     this.getValue= function() {

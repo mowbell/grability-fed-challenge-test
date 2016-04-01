@@ -46,20 +46,21 @@ var TestPlanCommand=function(commandString){
 		debugger;
 		var countTestCasesExecuted=0;
 		var resultsString="";
-		
+		var results=[];
 		var successCallback=function(){
 			debugger;
+			resultsString=results.join('\n');
 			console.log("Test Plan executed\n\n"+resultsString);
 			that.dispatchSuccess(resultsString);
 		};
 		var errorCallback=function(){
 			debugger;
-			this.dispatchError(arguments);
+			that.dispatchError(arguments);
 			console.warn("Error en la ejecución del test plan");
 		};
 		function testCaseExecuted(result){
 			debugger;
-			resultsString+=result+"\n";
+			results.push(result);
 			executeNextTestCase();
 		}
 		function executeNextTestCase(){
