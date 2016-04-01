@@ -14,7 +14,8 @@ module.exports = function(grunt) {
                     undef: false,
                     strict:false,
                     node:true,
-                    jasmine:true
+                    jasmine:true,
+                    //multistr:true
                 }
             }
         },
@@ -36,7 +37,7 @@ module.exports = function(grunt) {
             server: {
                 options: {
                     hostname: 'localhost',
-                    port: 8080,
+                    port: 8083,
                     livereload: true
                 }
             }

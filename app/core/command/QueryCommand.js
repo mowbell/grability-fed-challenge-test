@@ -30,17 +30,17 @@ var QueryCommand=function(commandString, _cubeSize){
 				var values=cmd.match(/-?\d+/g);
 
 				var cellX1=parseInt(values[0]);
-				var cellX2=parseInt(values[1]);
-				var cellY1=parseInt(values[2]);
-				var cellY2=parseInt(values[3]);
-				var cellZ1=parseInt(values[4]);
+				var cellY1=parseInt(values[1]);
+				var cellZ1=parseInt(values[2]);
+				var cellX2=parseInt(values[3]);
+				var cellY2=parseInt(values[4]);
 				var cellZ2=parseInt(values[5]);
 				
 				
 				if(
 					validateCell(cellX1) && validateCell(cellY1) && validateCell(cellZ1) &&
-					validateCell(cellX2) && validateCell(cellY2) && validateCell(cellZ2)
-
+					validateCell(cellX2) && validateCell(cellY2) && validateCell(cellZ2) &&
+					cellX1<=cellX2 && cellY1<=cellY2 && cellZ1<=cellZ2
 					){
 
 					setCubeCells(cellX1,cellX2,cellY1,cellY2,cellZ1,cellZ2);
