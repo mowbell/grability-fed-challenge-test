@@ -14,6 +14,18 @@ var UpdateCommand=function(commandString, _cubeSize){
 		cellY=Y;
 		cellZ=Z;
 	};
+	function getCellX(){
+		return cellX;
+	}
+	function getCellY(){
+		return cellY;
+	}
+	function getCellZ(){
+		return cellZ;
+	}
+	function getValueToTupdate(){
+		return valueToUpdate;
+	}
 	var setValueToTupdate=function(num){
 		valueToUpdate=num;
 	};
@@ -68,10 +80,10 @@ var UpdateCommand=function(commandString, _cubeSize){
 
 	};
 
-	this.execute=function(){
+	this.execute=function(cube){
 		debugger;
-		console.log('Update Executed '+that.getCommandString());
-		that.dispatchSuccess('Update OK '+that.getCommandString());
+		cube.updateCell(getCellX(), getCellY(), getCellZ(), getValueToTupdate())
+		.then(that.dispatchSuccess,that.dispatchError);
 		return that;
 	};
 };

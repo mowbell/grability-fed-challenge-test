@@ -92,8 +92,10 @@ var Execution = function(commandsString) {
 
     function executeCommands(testPlanCommand){
         debugger;
+        var timeStart=new Date().getTime();
         testPlanCommand.execute().getPromise().done(function(){
-            console.log("Ejecucion completada");
+            var timeEnd=new Date().getTime();
+            console.log("Ejecucion completada", timeEnd-timeStart);
             debugger;
         }).fail(function(){
             debugger;

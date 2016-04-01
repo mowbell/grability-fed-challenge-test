@@ -1,7 +1,7 @@
 var Command=require("./base/Command");
 var ErrorMessage=require("./../../config/ErrorMessage");
 var Config=require("./../../config/Config");
-
+var Cube=require("./../cube/Cube");
 var TestCaseCommand=function(commandString){
 	Command.call(this,commandString);
 	var cubeSize=0;
@@ -21,6 +21,10 @@ var TestCaseCommand=function(commandString){
 	this.getNumOperations=function(){
 		return numOperations;
 	};
+	function createCube(){
+		cube=new Cube(that.getCubeSize());
+		return cube;
+	}
 	function getCube(){
 		return cube;
 	}
@@ -63,6 +67,8 @@ var TestCaseCommand=function(commandString){
 
 	this.execute=function(){
 		debugger;
+		createCube();
+		
 		var countOperationsExecuted=0;
 		var resultsString="";
 		
@@ -92,8 +98,8 @@ var TestCaseCommand=function(commandString){
 				successCallback();
 			}
 		}
-		executeNextOperation();
-
+		debugger;
+		getCube().load().then(executeNextOperation, errorCallback);
 		
 		return that;
 	};
